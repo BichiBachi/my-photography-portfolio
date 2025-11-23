@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анна Петрова | Фотограф</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Навигация */
+        header {
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Герой секция */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Обо мне */
+        .about {
+            background: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Портфолио */
+        .portfolio {
+            background: #f1f1f1;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Контакты */
+        .contact {
+            background: white;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            color: #3498db;
+            width: 20px;
+        }
+        
+        /* Футер */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Адаптивность */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                height: 92vh;
+                top: 8vh;
+                background: #2c3e50;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                z-index: 1;
+            }
+            
+            .nav-links li {
+                opacity: 0;
+                margin: 20px 0;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .nav-active {
+                transform: translateX(0%);
+            }
+            
+            .about-content,
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+        }
+        
+        /* Анимация для меню */
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .toggle .line2 {
+            opacity: 0;
+        }
+        
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Анна Петрова</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главная секция -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Анна Петрова</h1>
+                <p>Профессиональный фотограф с 8-летним опытом. Специализируюсь на портретной, свадебной и коммерческой фотографии. Помогаю запечатлеть важные моменты жизни в уникальных кадрах.</p>
+                <a href="#portfolio" class="btn">Смотреть работы</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Обо мне</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Меня зовут Анна, и я профессиональный фотограф с более чем 8-летним опытом работы. Моя страсть к фотографии началась еще в детстве, когда я впервые взяла в руки камеру своего отца. С тех пор я прошла долгий путь от самоучки до профессионального фотографа, работающего с известными брендами и публикующимся в глянцевых журналах.</p>
+                    <p>Я специализируюсь на портретной, свадебной и коммерческой фотографии. Для меня важно не просто сделать качественные снимки, а передать эмоции, характер и историю каждого человека или бренда. Я считаю, что хорошая фотография — это та, которая вызывает эмоции и рассказывает историю.</p>
+                    <p>В своей работе я использую профессиональную технику Canon и специализированное осветительное оборудование. Постоянно совершенствую свои навыки, посещая мастер-классы и фотографические выставки по всему миру.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Анна Петрова - фотограф">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Мои работы</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" alt="Портретная фотография">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Свадебная фотография">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Коммерческая фотография">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Фэшн фотография">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Свяжитесь со мной</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p>Если вы хотите заказать фотосессию или у вас есть вопросы, пожалуйста, заполните форму или свяжитесь со мной напрямую.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:anna@example.com">anna@example.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>г. Москва, ул. Фотографов, д. 10</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Анна Петрова | Фотограф</div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Анна Петрова. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const navSlide = () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+            
+            burger.addEventListener('click', () => {
+                // Переключение навигации
+                nav.classList.toggle('nav-active');
+                
+                // Анимация ссылок
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+                
+                // Анимация бургера
+                burger.classList.toggle('toggle');
+            });
+        }
+        
+        navSlide();
+        
+        // Валидация формы
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            
+            if (!validateEmail(email)) {
+                alert('Пожалуйста, введите корректный email адрес');
+                return;
+            }
+            
+            alert('Сообщение отправлено! Я свяжусь с вами в ближайшее время.');
+            contactForm.reset();
+        });
+        
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
+</body>
+</html>
